@@ -12,25 +12,51 @@ const clickBtn = document.getElementById("clickBtn");
 const upgrade1Btn = document.getElementById("upgrade1");
 const upgradeText = document.querySelector("#upgrade1 + .upgrade-text");
 
-// Fonction pour mettre à jour l'affichage
+// ===== SAUVEGARDE =====
+function saveGame() {
+    const saveData = {
+        points: points,
+        pointsParSeconde: pointsParSeconde,
+        upgrade1Cost: upgrade1Cost,
+        upgrade1Level: upgrade1Level
+    };
+
+    localStorage.setItem("kayouSave", JSON.stringify(saveData));
+}
+
+function loadGame() {
+    const saved = localStorage.getItem("kayouSave");
+    if (saved) {
+        const data = JSON.parse(saved);
+
+        points = data.points || 0;
+        pointsParSeconde = data.pointsParSeconde || 1;
+        upgrade1Cost = data.upgrade1Cost || 2;
+        upgrade1Level = data.upgrade1Level || 0;
+
+        upgradeText.textContent = `+1 Kayou tapé/sec (Coût : ${upgrade1Cost} Kayoux!)`;
+    }
+}
+
+// Fonction affichage
 function updateDisplay() {
-    pointsDisplay.textContent = points;
+    pointsDisplay.textContent = Math.floor(points);
     gpsDisplay.textContent = pointsParSeconde;
 }
 
-// Clic sur l’image
+// Clic image
 clickBtn.addEventListener("click", () => {
     points++;
     updateDisplay();
 });
 
-// Production automatique par seconde
+// Production auto
 setInterval(() => {
     points += pointsParSeconde;
     updateDisplay();
 }, 1000);
 
-// ===== ORBIT UPGRADES =====
+// ===== ORBIT =====
 let orbitUpgrades = [];
 let orbitAngle = 0;
 
@@ -55,29 +81,34 @@ function animateOrbit() {
 }
 animateOrbit();
 
-// ===== ACHAT UPGRADE =====
+// Achat upgrade
 upgrade1Btn.addEventListener("click", () => {
     if (points >= upgrade1Cost) {
         points -= upgrade1Cost;
 
-        // NOUVEAU SCALING EXPONENTIEL
         upgrade1Level += 1;
         pointsParSeconde = Math.floor(Math.pow(1.5, upgrade1Level));
 
-        // Augmentation du prix
         upgrade1Cost = Math.floor(upgrade1Cost * 1.5);
 
-        // Mise à jour texte
         upgradeText.textContent = `+1 Kayou tapé/sec (Coût : ${upgrade1Cost} Kayoux!)`;
 
-        // Ajout image orbitante
         addOrbitUpgrade("https://fbi.cults3d.com/uploaders/25822624/illustration-file/cb64a7ab-6b01-4a98-adf1-1cc23a537445/thumbnail-9.png");
 
         updateDisplay();
-    } else {
-        alert("Pas assez de points !");
+        saveGame(); // sauvegarde immédiate après achat
     }
 });
 
-// Initialisation affichage
+// Sauvegarde automatique toutes les 3 secondes
+setInterval(saveGame, 3000);
+
+// Chargement au démarrage
+loadGame();
+
+// Reconstruction des images orbitantes selon le niveau
+for (let i = 0; i < upgrade1Level; i++) {
+    addOrbitUpgrade("https://fbi.cults3d.com/uploaders/25822624/illustration-file/cb64a7ab-6b01-4a98-adf1-1cc23a537445/thumbnail-9.png");
+}
+
 updateDisplay();
