@@ -12,32 +12,43 @@
     <p>Kayou : <span id="points">0</span></p>
     <p>Gain par seconde : <span id="gps">0</span></p>
 
-<div id="click-container" style="position: relative; display: inline-block;">
-    <img 
-        src="https://static.vecteezy.com/system/resources/thumbnails/032/325/146/small/rock-stone-boulder-isolated-on-transparent-background-file-cut-out-ai-generated-png.png" 
-        id="clickBtn" 
-        alt="Cliquer" 
-        style="width: 300px; display: block;"
-    >
+<div id="click-container">
+    <!-- conteneur bouton -->
+    <div id="button-wrapper">
+        <img 
+            src="https://static.vecteezy.com/system/resources/thumbnails/032/325/146/small/rock-stone-boulder-isolated-on-transparent-background-file-cut-out-ai-generated-png.png" 
+            id="clickBtn" 
+            alt="Cliquer"
+        >
+    </div>
 </div>
 
-
-    <!-- Shop -->
-<h2>Shop</h2>
+<!-- Séparateur Shop -->
+<h2 id="shop-title">Shop</h2>
 <div id="shop">
-<div class="upgrade">
-    <img 
-        src="https://fbi.cults3d.com/uploaders/25822624/illustration-file/cb64a7ab-6b01-4a98-adf1-1cc23a537445/thumbnail-9.png" 
-        id="upgrade1" 
-        alt="Upgrade"
-    >
-    <p class="upgrade-text">+1 Kayou tapé/sec (Coût : 2 Kayous!)</p>
-</div>
+    <!-- UPGRADE 1 -->
+    <div class="upgrade">
+        <img 
+            src="https://fbi.cults3d.com/uploaders/25822624/illustration-file/cb64a7ab-6b01-4a98-adf1-1cc23a537445/thumbnail-9.png" 
+            id="upgrade1" 
+            alt="Upgrade 1"
+        >
+        <p class="upgrade-text">+1 Kayou/sec<br>Niveau : 0<br>Coût : 2</p>
+    </div>
+
+    <!-- UPGRADE 2 -->
+    <div class="upgrade">
+        <img 
+            src="https://wiki.leagueoflegends.com/en-us/images/thumb/Rift_Scuttler_Render.png/303px-Rift_Scuttler_Render.png?928e2" 
+            id="upgrade2" 
+            alt="Upgrade 2"
+        >
+        <p class="upgrade-text">+2 Kayou/sec<br>Niveau : 0<br>Coût : 4</p>
+    </div>
 </div>
 
-
-    <!-- Script -->
-    <script src="script.js"></script>
+<!-- Script -->
+<script src="script.js"></script>
 
 </body>
 </html>
