@@ -9,6 +9,11 @@ clickBtn.addEventListener("click", () => {
 });
 
 let pointsParSeconde = 1;
+const gpsDisplay = document.getElementById("gps");
+clickBtn.addEventListener("click", () => {
+    points++;
+    updateDisplay();
+});
 
 setInterval(() => {
     points += pointsParSeconde;
