@@ -1,0 +1,11 @@
+.upgrade img {
+    width: 200px;      /* taille plus petite */
+    height: auto;     /* garde les proportions */
+    cursor: pointer;
+    border: none;     /* pas de cadre */
+    transition: transform 0.1s ease;
+}
+
+.upgrade img:active {
+    transform: scale(1); /* petit effet clic */
+}
